@@ -1,59 +1,64 @@
 <?php
 
+/**
+ * Created by Reliese Model.
+ */
+
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
- * @property integer $id
- * @property integer $user_id
- * @property integer $employee_id
- * @property integer $service_id
- * @property string $schedulling_date
- * @property string $created_at
- * @property string $updated_at
+ * Class Schedule
+ * 
+ * @property int $id
+ * @property int $user_id
+ * @property int $employee_id
+ * @property int $service_id
+ * @property Carbon $schedulling_date
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * 
  * @property Employee $employee
  * @property Service $service
  * @property User $user
+ *
+ * @package App\Models
  */
 class Schedule extends Model
 {
-    use HasFactory;
+	protected $table = 'schedules';
 
-    /**
-     * The "type" of the auto-incrementing ID.
-     * 
-     * @var string
-     */
-    protected $keyType = 'integer';
+	protected $casts = [
+		'user_id' => 'int',
+		'employee_id' => 'int',
+		'service_id' => 'int'
+	];
 
-    /**
-     * @var array
-     */
-    protected $fillable = ['user_id', 'employee_id', 'service_id', 'schedulling_date', 'created_at', 'updated_at'];
+	protected $dates = [
+		'schedulling_date'
+	];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function employee()
-    {
-        return $this->belongsTo('App\Employee');
-    }
+	protected $fillable = [
+		'user_id',
+		'employee_id',
+		'service_id',
+		'schedulling_date'
+	];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function service()
-    {
-        return $this->belongsTo('App\Service');
-    }
+	public function employee()
+	{
+		return $this->belongsTo(Employee::class);
+	}
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function user()
-    {
-        return $this->belongsTo('App\User');
-    }
+	public function service()
+	{
+		return $this->belongsTo(Service::class);
+	}
+
+	public function user()
+	{
+		return $this->belongsTo(User::class);
+	}
 }

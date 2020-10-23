@@ -1,39 +1,43 @@
 <?php
 
+/**
+ * Created by Reliese Model.
+ */
+
 namespace App\Models;
 
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
- * @property integer $id
+ * Class Service
+ * 
+ * @property int $id
  * @property string $name
- * @property float $const
- * @property string $created_at
- * @property string $updated_at
- * @property Schedule[] $schedules
+ * @property float $cost
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * 
+ * @property Collection|Schedule[] $schedules
+ *
+ * @package App\Models
  */
 class Service extends Model
 {
-    use HasFactory;
+	protected $table = 'services';
 
-    /**
-     * The "type" of the auto-incrementing ID.
-     * 
-     * @var string
-     */
-    protected $keyType = 'integer';
+	protected $casts = [
+		'cost' => 'float'
+	];
 
-    /**
-     * @var array
-     */
-    protected $fillable = ['name', 'const', 'created_at', 'updated_at'];
+	protected $fillable = [
+		'name',
+		'cost'
+	];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function schedules()
-    {
-        return $this->hasMany('App\Schedule');
-    }
+	public function schedules()
+	{
+		return $this->hasMany(Schedule::class);
+	}
 }

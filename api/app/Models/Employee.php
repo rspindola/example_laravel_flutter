@@ -1,59 +1,60 @@
 <?php
 
+/**
+ * Created by Reliese Model.
+ */
+
 namespace App\Models;
 
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
- * @property integer $id
- * @property integer $user_id
- * @property integer $company_id
+ * Class Employee
+ * 
+ * @property int $id
+ * @property int $user_id
+ * @property int $company_id
  * @property string $first_name
  * @property string $last_name
- * @property string $created_at
- * @property string $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * 
  * @property Company $company
  * @property User $user
- * @property Schedule[] $schedules
+ * @property Collection|Schedule[] $schedules
+ *
+ * @package App\Models
  */
 class Employee extends Model
 {
-    use HasFactory;
+	protected $table = 'employees';
 
-    /**
-     * The "type" of the auto-incrementing ID.
-     * 
-     * @var string
-     */
-    protected $keyType = 'integer';
+	protected $casts = [
+		'user_id' => 'int',
+		'company_id' => 'int'
+	];
 
-    /**
-     * @var array
-     */
-    protected $fillable = ['user_id', 'company_id', 'first_name', 'last_name', 'created_at', 'updated_at'];
+	protected $fillable = [
+		'user_id',
+		'company_id',
+		'first_name',
+		'last_name'
+	];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function company()
-    {
-        return $this->belongsTo('App\Company');
-    }
+	public function company()
+	{
+		return $this->belongsTo(Company::class);
+	}
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function user()
-    {
-        return $this->belongsTo('App\User');
-    }
+	public function user()
+	{
+		return $this->belongsTo(User::class);
+	}
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function schedules()
-    {
-        return $this->hasMany('App\Schedule');
-    }
+	public function schedules()
+	{
+		return $this->hasMany(Schedule::class);
+	}
 }

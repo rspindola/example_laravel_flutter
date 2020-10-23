@@ -166,6 +166,7 @@ return [
          * Package Service Providers...
          */
         Krlove\EloquentModelGenerator\Provider\GeneratorServiceProvider::class,
+        Reliese\Coders\CodersServiceProvider::class,
 
         /*
          * Application Service Providers...

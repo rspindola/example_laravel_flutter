@@ -75,7 +75,7 @@ class JwtAuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function logout() {
-        auth()->logout();
+        auth('api')->logout();
 
         return response()->json(['message' => 'User successfully signed out']);
     }
@@ -86,7 +86,7 @@ class JwtAuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function refresh() {
-        return $this->createNewToken(auth()->refresh());
+        return $this->createNewToken(auth('api')->refresh());
     }
 
     /**
@@ -110,7 +110,7 @@ class JwtAuthController extends Controller
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth('api')->factory()->getTTL() * 60,
-            'user' => auth()->user()
+            'user' => auth('api')->user()
         ]);
     }
 }

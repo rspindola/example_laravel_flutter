@@ -29,6 +29,22 @@ Route::group(['middleware' => 'api',], function ($router) {
     Route::post('register', [JwtAuthController::class, 'register']);
     Route::post('logout', [JwtAuthController::class, 'logout']);
     Route::post('refresh', [JwtAuthController::class, 'refresh']);
-    Route::post('me', [JwtAuthController::class, 'me']);
+    Route::post('me', [JwtAuthController::class, 'userProfile']);
+
+    Route::resource('companies', ApiCompanyController::class)->except([
+        'create', 'edit'
+    ]);
+
+    Route::resource('employees', ApiEmployeeController::class)->except([
+        'create', 'edit'
+    ]);
+
+    Route::resource('schedules', ApiScheduleController::class)->except([
+        'create', 'edit'
+    ]);
+
+    Route::resource('services', ApiServiceController::class)->except([
+        'create', 'edit'
+    ]);
 
 });

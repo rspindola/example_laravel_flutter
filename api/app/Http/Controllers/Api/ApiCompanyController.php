@@ -6,7 +6,7 @@ use App\Models\Company;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CompanyController extends Controller
+class ApiCompanyController extends Controller
 {
     /**
      * Create a new AuthController instance.
@@ -82,14 +82,13 @@ class CompanyController extends Controller
     public function update(Request $request, Company $company)
     {
         $company = Company::find($company->id);
-        $company->name = $request->name;
-        $company->latitude = $request->latitude;
-        $company->longitude = $request->longitude;
-        $company->phone = $request->phone;
-        $company->social_link = $request->social_link;
-        $company->save();
-
         if($company)
+            $company->name = $request->name;
+            $company->latitude = $request->latitude;
+            $company->longitude = $request->longitude;
+            $company->phone = $request->phone;
+            $company->social_link = $request->social_link;
+            $company->save();
             return response()->json($company);
 
         return response()->json(['error' => 'Resource not update', 401]);
@@ -104,9 +103,8 @@ class CompanyController extends Controller
     public function destroy(Company $company)
     {
         $company = Company::find($company->id);
-        $company->remove();
-
         if($company)
+            $company->delete();
             return response()->json($company);
 
         return response()->json(['error' => 'Resource not remove', 401]);
