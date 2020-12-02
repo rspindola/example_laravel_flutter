@@ -14,11 +14,6 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = Employee::all();
-        if($employees)
-            return response()->json($employees);
-        
-        return response()->json(['error' => 'Response not found', 401]);
 
     }
 

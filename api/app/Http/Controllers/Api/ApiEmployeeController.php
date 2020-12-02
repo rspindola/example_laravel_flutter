@@ -15,7 +15,7 @@ class ApiEmployeeController extends Controller
      */
     public function index()
     {
-        $employees = Employee::with('company', 'user', 'schedules')->get();
+        $employees = Employee::with('company', 'user', 'schedules.services')->get();
         if($employees)
             return response()->json($employees);
         

@@ -24,6 +24,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Company $company
  * @property User $user
  * @property Collection|Schedule[] $schedules
+ * @property Collection|Service[] $services
  *
  * @package App\Models
  */
@@ -56,5 +57,10 @@ class Employee extends Model
 	public function schedules()
 	{
 		return $this->hasMany(Schedule::class);
+	}
+
+	public function services()
+	{
+		return $this->hasMany(Service::class);
 	}
 }
