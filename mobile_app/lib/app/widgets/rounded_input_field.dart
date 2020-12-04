@@ -16,8 +16,8 @@ class RoundedInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
-      child: TextField(
-        onChanged: onChanged,
+      child: TextFormField(
+        onSaved: onChanged,
         cursorColor: kPrimaryColor,
         decoration: InputDecoration(
           icon: Icon(

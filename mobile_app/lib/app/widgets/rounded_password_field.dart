@@ -2,21 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:mobile_app/app/utils/contants.dart';
 import 'package:mobile_app/app/widgets/text_field_container.dart';
 
+// ignore: must_be_immutable
 class RoundedPasswordField extends StatelessWidget {
   final ValueChanged<String> onChanged;
-  const RoundedPasswordField({
+  final Function onPressed;
+  bool showPassword;
+
+  RoundedPasswordField({
     Key key,
     this.onChanged,
+    this.onPressed,
+    this.showPassword = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    bool showPassword = true;
-
     return TextFieldContainer(
-      child: TextField(
-        obscureText: showPassword,
-        onChanged: onChanged,
+      child: TextFormField(
+        obscureText: !showPassword,
+        onSaved: onChanged,
         cursorColor: kPrimaryColor,
         decoration: InputDecoration(
           hintText: "Digite a senha",
@@ -29,7 +33,7 @@ class RoundedPasswordField extends StatelessWidget {
               Icons.visibility,
               color: kPrimaryColor,
             ),
-            onPressed: () => showPassword = !showPassword,
+            onPressed: onPressed,
           ),
           border: InputBorder.none,
         ),

@@ -7,12 +7,12 @@ class AuthApiClient {
   final http.Client httpClient = http.Client();
 
   // ignore: missing_return
-  Future<Map<String, dynamic>> login(String username, String password) async {
+  Future<Map<String, dynamic>> login(String email, String password) async {
     try {
       var response = await httpClient.post(
         baseUrl + '/login',
         body: {
-          "username": username,
+          "email": email,
           "password": password,
         },
       );

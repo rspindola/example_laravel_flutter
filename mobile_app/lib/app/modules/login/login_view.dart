@@ -16,35 +16,46 @@ class LoginPage extends GetView<LoginController> {
     return Scaffold(
       body: Background(
         child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                "LOGIN",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: size.height * 0.03),
-              SvgPicture.asset(
-                "assets/icons/login.svg",
-                height: size.height * 0.35,
-              ),
-              SizedBox(height: size.height * 0.03),
-              RoundedInputField(
-                hintText: "Digite o E-mail",
-                onChanged: (value) {},
-              ),
-              RoundedPasswordField(
-                onChanged: (value) {},
-              ),
-              RoundedButton(
-                text: "ENTRAR",
-                press: () {},
-              ),
-              SizedBox(height: size.height * 0.03),
-              AlreadyHaveAnAccountCheck(
-                press: () => Get.offAndToNamed(Routes.CADASTRO),
-              ),
-            ],
+          child: Form(
+            key: controller.loginFormKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  "LOGIN",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: size.height * 0.03),
+                SvgPicture.asset(
+                  "assets/icons/login.svg",
+                  height: size.height * 0.35,
+                ),
+                SizedBox(height: size.height * 0.03),
+                RoundedInputField(
+                  hintText: "Digite o E-mail",
+                  onChanged: (email) => controller.user.email = email,
+                ),
+                Obx(
+                  () => RoundedPasswordField(
+                    onPressed: () {
+                      controller.showPassword.value =
+                          !controller.showPassword.value;
+                    },
+                    showPassword: controller.showPassword.value,
+                    onChanged: (password) =>
+                        controller.user.password = password,
+                  ),
+                ),
+                RoundedButton(
+                  text: "ENTRAR",
+                  press: controller.login,
+                ),
+                SizedBox(height: size.height * 0.03),
+                AlreadyHaveAnAccountCheck(
+                  press: () => Get.offAndToNamed(Routes.CADASTRO),
+                ),
+              ],
+            ),
           ),
         ),
       ),

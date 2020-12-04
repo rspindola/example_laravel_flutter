@@ -2,6 +2,7 @@ class User {
   int id;
   String name;
   String email;
+  String password;
   Null emailVerifiedAt;
   String createdAt;
   String updatedAt;
