@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:mobile_app/app/modules/home/home_binding.dart';
+import 'package:mobile_app/app/modules/home/home_view.dart';
 import 'package:mobile_app/app/modules/initial/initial_binding.dart';
 import 'package:mobile_app/app/modules/initial/initial_view.dart';
 import 'package:mobile_app/app/modules/login/login_binding.dart';
@@ -30,6 +32,11 @@ abstract class AppPages {
       name: Routes.CADASTRO,
       page: () => SignupPage(),
       binding: SignupBinding(),
+    ),
+    GetPage(
+      name: Routes.HOME,
+      page: () => HomeView(),
+      binding: HomeBinding(),
     ),
   ];
 }

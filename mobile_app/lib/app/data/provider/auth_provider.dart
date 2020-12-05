@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-
-const baseUrl = 'http://localhost:8000/api';
+import 'package:mobile_app/app/utils/contants.dart';
 
 class AuthApiClient {
   final http.Client httpClient = http.Client();
@@ -10,7 +9,7 @@ class AuthApiClient {
   Future<Map<String, dynamic>> login(String email, String password) async {
     try {
       var response = await httpClient.post(
-        baseUrl + '/login',
+        baseUrlApi + '/login',
         body: {
           "email": email,
           "password": password,
