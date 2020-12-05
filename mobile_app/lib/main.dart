@@ -6,7 +6,7 @@ import 'package:mobile_app/app/routes/app_pages.dart';
 import 'package:mobile_app/app/theme/app_theme.dart';
 
 void main() async {
-  await GetStorage.init();
+  await GetStorage.init('barberapp');
   runApp(
     GetMaterialApp(
       title: "BarberApp",

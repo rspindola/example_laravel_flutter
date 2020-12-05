@@ -7,7 +7,7 @@ import 'package:mobile_app/app/routes/app_pages.dart';
 
 class LoginController extends GetxController {
   final repository = Get.find<AuthRepository>();
-  final box = GetStorage();
+  final box = GetStorage('barberapp');
 
   User user = User();
   RxBool showPassword = false.obs;
