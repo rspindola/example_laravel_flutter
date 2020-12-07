@@ -33,7 +33,7 @@ class ApiScheduleController extends Controller
     {
         $schedule = new Schedule();
         
-        $schedule->company_id = $request->company_id;
+        $schedule->employee_id = $request->employee_id;
         $schedule->user_id = $request->user_id;
         $schedule->service_id = $request->service_id;
         $schedule->schedulling_date = $request->schedulling_date;
@@ -71,7 +71,7 @@ class ApiScheduleController extends Controller
     {
         $schedule = Schedule::find($schedule->id);
         if($schedule)
-            $schedule->company_id = $request->company_id;
+            $schedule->employee_id = $request->employee_id;
             $schedule->user_id = $request->user_id;
             $schedule->service_id = $request->service_id;
             $schedule->schedulling_date = $request->schedulling_date;
