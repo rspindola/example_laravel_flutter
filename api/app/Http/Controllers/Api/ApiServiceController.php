@@ -44,6 +44,7 @@ class ApiServiceController extends Controller
     {
         $service = new Service();
         
+        $service->employee_id = $request->employee_id;
         $service->name = $request->name;
         $service->cost = $request->cost;
         $service->save();
@@ -80,6 +81,7 @@ class ApiServiceController extends Controller
     {
         $service = Service::find($service->id);
         if($service)
+            $service->employee_id = $request->employee_id;
             $service->name = $request->name;
             $service->cost = $request->cost;
             $service->save();
