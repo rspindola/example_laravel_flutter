@@ -25,7 +25,8 @@ class ApiScheduleController extends Controller
      */
     public function index()
     {
-        $schedules = Schedule::all();
+        $user = auth('api')->user();
+        $schedules = Schedule::with('employee', 'service')->where('user_id', $user->id)-orderBy('schedulling_date')->get();
         if($schedules)
             return response()->json($schedules);
         
